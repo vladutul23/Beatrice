@@ -3,67 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pentru Tine ❤️</title>
+    <title>Pentru Beatrice ❤️</title>
     <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #ffdde1;
-            font-family: 'Arial', sans-serif;
-            margin: 0;
+        body { 
+            background-color: #ffdae0; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+        }
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             text-align: center;
+            width: 90%;
+            max-width: 400px;
         }
-        h1 {
-            color: #d63384;
-            font-size: 2.5rem;
+        h1 { color: #d63384; font-size: 24px; }
+        .buttons { margin-top: 30px; position: relative; height: 150px; }
+        .btn {
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: absolute;
         }
-        p {
-            color: #555;
-            font-size: 1.2rem;
-            max-width: 600px;
-            padding: 0 20px;
+        #yesBtn {
+            background-color: #2ecc71;
+            color: white;
+            left: 20px;
+            z-index: 100;
         }
-        .heart {
-            font-size: 5rem;
-            color: red;
-            animation: beat 1s infinite alternate;
+        #noBtn {
+            background-color: #e74c3c;
+            color: white;
+            right: 20px;
         }
-        @keyframes beat {
-            to { transform: scale(1.2); }
-        }
-        .photo {
-            width: 250px;
-            height: 250px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 5px solid white;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            margin: 20px 0;
-            /* Poti schimba linkul de mai jos cu o poza cu voi */
-            background-image: url('https://images.unsplash.com/photo-1518568814500-bf0f8d125f46?ixlib=rb-4.0.3'); 
-            background-size: cover;
-            background-position: center;
-        }
+        #success-msg { display: none; }
+        .heart { font-size: 50px; }
     </style>
 </head>
 <body>
 
+<div class="card" id="mainCard">
     <div class="heart">❤️</div>
+    <h1 id="question">Beatrice, vrei să fim cel mai tare cuplu și anul ăsta?</h1>
     
-    <h1>Te ador iubita mea , Beatrice!</h1>
-    
-    <div class="photo"></div>
+    <div class="buttons">
+        <button id="yesBtn" class="btn" onclick="celebrate()">DA!</button>
+        <button id="noBtn" class="btn" onmouseover="moveNo()" onclick="moveNo()">NU</button>
+    </div>
+</div>
 
-    <p>
-        Am făcut acest mic site ca să îți spun cât de mult însemni pentru mine.
-        Ești cea mai tare persoană din lume și te iubesc enorm!
-        <br><br>
-        Cu dragoste,<br>
-        [Vladut al tau]
-    </p>
+<div class="card" id="success-msg">
+    <div class="heart">🥰</div>
+    <h1>Știam eu! ❤️</h1>
+    <p>Ești cea mai specială persoană pentru mine. Te iubesc!</p>
+</div>
+
+<script>
+    function moveNo() {
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+        
+        // Face butonul DA mai mare de fiecare data cand ea incearca sa dea pe NU
+        let currentSize = parseFloat(window.getComputedStyle(yesBtn).fontSize);
+        yesBtn.style.fontSize = (currentSize + 2) + "px";
+        yesBtn.style.padding = (currentSize + 5) + "px " + (currentSize * 2) + "px";
+
+        // Muta butonul NU random pe ecran
+        const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+        const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+        
+        noBtn.style.position = "fixed";
+        noBtn.style.left = x + "px";
+        noBtn.style.top = y + "px";
+    }
+
+    function celebrate() {
+        document.getElementById('mainCard').style.display = 'none';
+        document.getElementById('success-msg').style.display = 'block';
+        
+        // Efect de confetti (simulat prin alert sau poti adauga o librarie)
+        alert("Te iubesc enorm, Beatrice! ❤️");
+    }
+</script>
 
 </body>
 </html>
